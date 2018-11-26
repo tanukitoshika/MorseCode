@@ -2169,26 +2169,26 @@
  745              		.file 11 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 system_XMC4500.c
-     /tmp/ccKqb36c.s:21     .no_init:0000000000000000 SystemCoreClock
-     /tmp/ccKqb36c.s:18     .no_init:0000000000000000 $d
-     /tmp/ccKqb36c.s:27     .no_init:0000000000000004 g_chipid
-     /tmp/ccKqb36c.s:30     .text.delay:0000000000000000 $t
-     /tmp/ccKqb36c.s:36     .text.delay:0000000000000000 delay
-     /tmp/ccKqb36c.s:95     .text.SystemInit:0000000000000000 $t
-     /tmp/ccKqb36c.s:102    .text.SystemInit:0000000000000000 SystemInit
-     /tmp/ccKqb36c.s:146    .text.SystemCoreSetup:0000000000000000 SystemCoreSetup
-     /tmp/ccKqb36c.s:264    .text.SystemCoreClockSetup:0000000000000000 SystemCoreClockSetup
-     /tmp/ccKqb36c.s:134    .text.SystemInit:0000000000000020 $d
-     /tmp/ccKqb36c.s:139    .text.SystemCoreSetup:0000000000000000 $t
-     /tmp/ccKqb36c.s:250    .text.SystemCoreSetup:0000000000000064 $d
-     /tmp/ccKqb36c.s:257    .text.SystemCoreClockSetup:0000000000000000 $t
-     /tmp/ccKqb36c.s:701    .text.OSCHP_GetFrequency:0000000000000000 OSCHP_GetFrequency
-     /tmp/ccKqb36c.s:560    .text.SystemCoreClockUpdate:0000000000000000 SystemCoreClockUpdate
-     /tmp/ccKqb36c.s:538    .text.SystemCoreClockSetup:00000000000001dc $d
-     /tmp/ccKqb36c.s:553    .text.SystemCoreClockUpdate:0000000000000000 $t
-     /tmp/ccKqb36c.s:686    .text.SystemCoreClockUpdate:00000000000000c4 $d
-     /tmp/ccKqb36c.s:694    .text.OSCHP_GetFrequency:0000000000000000 $t
-     /tmp/ccKqb36c.s:731    .text.OSCHP_GetFrequency:0000000000000010 $d
+     /tmp/cc8n7SKU.s:21     .no_init:0000000000000000 SystemCoreClock
+     /tmp/cc8n7SKU.s:18     .no_init:0000000000000000 $d
+     /tmp/cc8n7SKU.s:27     .no_init:0000000000000004 g_chipid
+     /tmp/cc8n7SKU.s:30     .text.delay:0000000000000000 $t
+     /tmp/cc8n7SKU.s:36     .text.delay:0000000000000000 delay
+     /tmp/cc8n7SKU.s:95     .text.SystemInit:0000000000000000 $t
+     /tmp/cc8n7SKU.s:102    .text.SystemInit:0000000000000000 SystemInit
+     /tmp/cc8n7SKU.s:146    .text.SystemCoreSetup:0000000000000000 SystemCoreSetup
+     /tmp/cc8n7SKU.s:264    .text.SystemCoreClockSetup:0000000000000000 SystemCoreClockSetup
+     /tmp/cc8n7SKU.s:134    .text.SystemInit:0000000000000020 $d
+     /tmp/cc8n7SKU.s:139    .text.SystemCoreSetup:0000000000000000 $t
+     /tmp/cc8n7SKU.s:250    .text.SystemCoreSetup:0000000000000064 $d
+     /tmp/cc8n7SKU.s:257    .text.SystemCoreClockSetup:0000000000000000 $t
+     /tmp/cc8n7SKU.s:701    .text.OSCHP_GetFrequency:0000000000000000 OSCHP_GetFrequency
+     /tmp/cc8n7SKU.s:560    .text.SystemCoreClockUpdate:0000000000000000 SystemCoreClockUpdate
+     /tmp/cc8n7SKU.s:538    .text.SystemCoreClockSetup:00000000000001dc $d
+     /tmp/cc8n7SKU.s:553    .text.SystemCoreClockUpdate:0000000000000000 $t
+     /tmp/cc8n7SKU.s:686    .text.SystemCoreClockUpdate:00000000000000c4 $d
+     /tmp/cc8n7SKU.s:694    .text.OSCHP_GetFrequency:0000000000000000 $t
+     /tmp/cc8n7SKU.s:731    .text.OSCHP_GetFrequency:0000000000000010 $d
                            .group:0000000000000000 wm4.0.7a9f4dea188ccacb7d502cdcabb040c1
                            .group:0000000000000000 wm4._newlib_version.h.4.875b979a44719054cd750d0952ad3fd6
                            .group:0000000000000000 wm4.newlib.h.18.5e5ca3429233af402d406a202f1fc1ac

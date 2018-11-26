@@ -1,22 +1,28 @@
 
 #include <xmc_gpio.h>
-#include "VirtualSerial.h"
+#include <xmc_eru.h>
+#include <xmc_scu.h>
 #include <stdio.h>
 #include <string.h>
+#include "VirtualSerial.h"
 
-#define TICKS_PER_SECOND 1000
-#define TICKS_WAIT 100
-#define TICKS_WAIT2 300
+#define TICKS_PER_SECOND 100
+#define TICKS_WAIT 10
+#define TICKS_WAIT2 30
 
 #define LED1 P1_1
 #define LED2 P1_0
-#define GPIO_BUTTON1 XMC_GPIO_PORT1, 14
-#define GPIO_BUTTON2 XMC_GPIO_PORT1, 15
+#define BUTTON1 P1_14
+#define BUTTON2 P1_15
 
 // converts ascii-characters into morse code
-char code[100];
+char code[100] = " ";
 int32_t j = 0;
-char letter;
+char letter = 0;
+int32_t execution = 0;
+uint32_t ticks = 0;
+uint32_t tick2 = 0;
+int length = 0;
 
 void ascii_to_morse(char character)
 {
@@ -268,9 +274,8 @@ void ascii_to_morse(char character)
 
 void SysTick_Handler(void)
 {
-  static uint32_t ticks = 0;
-
   ticks++;
+  tick2++;
   switch (letter)
   {
   case '.':
@@ -282,7 +287,7 @@ void SysTick_Handler(void)
     {
       XMC_GPIO_ToggleOutput(LED1);
     }
-    if (ticks == TICKS_WAIT + 100)
+    if (ticks == TICKS_WAIT + TICKS_WAIT)
     {
       ticks = 0;
       j++;
@@ -298,7 +303,7 @@ void SysTick_Handler(void)
     {
       XMC_GPIO_ToggleOutput(LED1);
     }
-    if (ticks == TICKS_WAIT2 + 100)
+    if (ticks == TICKS_WAIT2 + TICKS_WAIT)
     {
       ticks = 0;
       j++;
@@ -306,7 +311,7 @@ void SysTick_Handler(void)
     break;
 
   case ' ':
-    if (ticks == 200)
+    if (ticks == TICKS_WAIT * 2)
     {
       ticks = 0;
       j++;
@@ -314,11 +319,9 @@ void SysTick_Handler(void)
     break;
 
   case 0:
-    if (ticks == 5000)
-    {
-      ticks = 0;
-      j = 0;
-    }
+    ticks = 0;
+    j = 0;
+    execution = 0;
     break;
 
   default:
@@ -330,17 +333,31 @@ void SysTick_Handler(void)
 
 void translate_to_morse(char text[])
 {
-  int length = strlen(text);
+  int length_c = strlen(text);
   int i;
   char character;
 
-  for (i = 0; i < length; i++) // translation loop
+  for (i = 0; i < length_c; i++) // translation loop
   {
     character = text[i];
 
     ascii_to_morse(character); // converts characters to morse code
   }
   printf("\n%s", code);
+}
+
+void translate_to_led()
+{
+  if (j < length)
+  {
+    letter = code[j];
+  }
+  else
+  {
+    letter = 0;
+    j = 0;
+    execution = 0;
+  }
 }
 
 /* Clock configuration */
@@ -356,33 +373,28 @@ XMC_SCU_CLOCK_CONFIG_t clock_config = {
     .fsys_clkdiv = 1,
     .fcpu_clkdiv = 1,
     .fccu_clkdiv = 1,
-    .fperipheral_clkdiv = 1
-};
+    .fperipheral_clkdiv = 1};
 
+void SystemCoreClockSetup(void)
+{
+  /* Setup settings for USB clock */
+  XMC_SCU_CLOCK_Init(&clock_config);
 
-void SystemCoreClockSetup(void) {
-    /* Setup settings for USB clock */
-    XMC_SCU_CLOCK_Init(&clock_config);
+  XMC_SCU_CLOCK_EnableUsbPll();
+  XMC_SCU_CLOCK_StartUsbPll(2, 64);
+  XMC_SCU_CLOCK_SetUsbClockDivider(4);
+  XMC_SCU_CLOCK_SetUsbClockSource(XMC_SCU_CLOCK_USBCLKSRC_USBPLL);
+  XMC_SCU_CLOCK_EnableClock(XMC_SCU_CLOCK_USB);
 
-    XMC_SCU_CLOCK_EnableUsbPll();
-    XMC_SCU_CLOCK_StartUsbPll(2, 64);
-    XMC_SCU_CLOCK_SetUsbClockDivider(4);
-    XMC_SCU_CLOCK_SetUsbClockSource(XMC_SCU_CLOCK_USBCLKSRC_USBPLL);
-    XMC_SCU_CLOCK_EnableClock(XMC_SCU_CLOCK_USB);
-
-    SystemCoreClockUpdate();
+  SystemCoreClockUpdate();
 }
 
 int main(void)
 {
   char text[100] = "I CAN MORSE";
-  printf("%s", text);
-
-  printf("\n");
 
   translate_to_morse(text); // main translation function
-
-  int length = strlen(code);
+  length = strlen(code);
 
   uint16_t Bytes = 0;
 
@@ -391,49 +403,65 @@ int main(void)
        .output_level = XMC_GPIO_OUTPUT_LEVEL_LOW,
        .output_strength = XMC_GPIO_OUTPUT_STRENGTH_MEDIUM};
   const XMC_GPIO_CONFIG_t in_config =
-      {.mode = XMC_GPIO_MODE_INPUT_TRISTATE,
+      {.mode = XMC_GPIO_MODE_INPUT_PULL_DOWN,
        .output_level = XMC_GPIO_OUTPUT_LEVEL_LOW,
        .output_strength = XMC_GPIO_OUTPUT_STRENGTH_STRONG_SHARP_EDGE};
 
   XMC_GPIO_Init(LED1, &out_config);
-  XMC_GPIO_Init(GPIO_BUTTON1, &in_config);
-  XMC_GPIO_Init(GPIO_BUTTON2, &in_config);
+  XMC_GPIO_Init(LED2, &out_config);
+  XMC_GPIO_Init(BUTTON1, &in_config);
+  XMC_GPIO_Init(BUTTON2, &in_config);
+  USB_Init();
 
-  /* System timer configuration */
   SysTick_Config(SystemCoreClock / TICKS_PER_SECOND);
+  int32_t last_tick = 0;
+  int32_t second_last_tick = 0;
+  int d;
+  int on = 0;
 
   while (1)
   {
     /* Check if data received */
-    // Bytes = CDC_Device_BytesReceived(&VirtualSerial_CDC_Interface);
+    Bytes = CDC_Device_BytesReceived(&VirtualSerial_CDC_Interface);
 
-    // while (Bytes > 0)
-    // {
-    //   /* Send data back to the host */
-    //   CDC_Device_SendByte(&VirtualSerial_CDC_Interface,
-    //                       CDC_Device_ReceiveByte(&VirtualSerial_CDC_Interface));
-    //   --Bytes;
-    // }
-
-    if (XMC_GPIO_GetInput(GPIO_BUTTON1) == 0)
+    while (Bytes > 0)
     {
-      while (1)
+      /* Send data back to the host */
+      CDC_Device_SendByte(&VirtualSerial_CDC_Interface,
+                          CDC_Device_ReceiveByte(&VirtualSerial_CDC_Interface));
+      --Bytes;
+    }
+
+    if (XMC_GPIO_GetInput(BUTTON1) == 0)
+    {
+      execution = 1;
+      if (on == 0)
       {
-        if (j < length)
-        {
-          letter = code[j];
-        }
-        else
-        {
-          letter = 1;
-          j=0;
-          break;
-        }
+        second_last_tick = last_tick;
+        last_tick = tick2;
+        d = last_tick - second_last_tick;
       }
-    } else {
+      on = 1;
+    }
+    else
+    {
+      on = 0;
+    }
+
+    if (execution == 1)
+    {
+      translate_to_led();
+    }
+    else if (XMC_GPIO_GetInput(BUTTON2) == 0 && last_tick != 0 && d < TICKS_PER_SECOND)
+    {
+      execution = 1;
+    }
+    else
+    {
       XMC_GPIO_SetOutputLow(LED1);
     }
 
-    // CDC_Device_USBTask(&VirtualSerial_CDC_Interface);
+    CDC_Device_USBTask(&VirtualSerial_CDC_Interface);
   }
+  return 0;
 }

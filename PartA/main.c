@@ -358,9 +358,6 @@ int main(void)
 {
 
   char text[100] = "I CAN MORSE";
-  printf("%s", text);
-
-  printf("\n");
 
   translate_to_morse(text); // main translation function
 
@@ -380,4 +377,5 @@ int main(void)
     /* Infinite loop */
     translate_to_led();
   }
+  return 0;
 }

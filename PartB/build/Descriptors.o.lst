@@ -555,15 +555,15 @@
  293              		.file 20 "Descriptors.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Descriptors.c
-     /tmp/ccMPhGCp.s:21     .rodata:0000000000000000 DeviceDescriptor
-     /tmp/ccMPhGCp.s:18     .rodata:0000000000000000 $d
-     /tmp/ccMPhGCp.s:40     .rodata:0000000000000014 ConfigurationDescriptor
-     /tmp/ccMPhGCp.s:102    .rodata:0000000000000054 LanguageString
-     /tmp/ccMPhGCp.s:110    .rodata:000000000000005c ManufacturerString
-     /tmp/ccMPhGCp.s:123    .rodata:00000000000000b8 ProductString
-     /tmp/ccMPhGCp.s:130    .text.CALLBACK_USB_GetDescriptor:0000000000000000 $t
-     /tmp/ccMPhGCp.s:137    .text.CALLBACK_USB_GetDescriptor:0000000000000000 CALLBACK_USB_GetDescriptor
-     /tmp/ccMPhGCp.s:265    .text.CALLBACK_USB_GetDescriptor:000000000000008c $d
+     /tmp/ccDwlZo6.s:21     .rodata:0000000000000000 DeviceDescriptor
+     /tmp/ccDwlZo6.s:18     .rodata:0000000000000000 $d
+     /tmp/ccDwlZo6.s:40     .rodata:0000000000000014 ConfigurationDescriptor
+     /tmp/ccDwlZo6.s:102    .rodata:0000000000000054 LanguageString
+     /tmp/ccDwlZo6.s:110    .rodata:000000000000005c ManufacturerString
+     /tmp/ccDwlZo6.s:123    .rodata:00000000000000b8 ProductString
+     /tmp/ccDwlZo6.s:130    .text.CALLBACK_USB_GetDescriptor:0000000000000000 $t
+     /tmp/ccDwlZo6.s:137    .text.CALLBACK_USB_GetDescriptor:0000000000000000 CALLBACK_USB_GetDescriptor
+     /tmp/ccDwlZo6.s:265    .text.CALLBACK_USB_GetDescriptor:000000000000008c $d
                            .group:0000000000000000 wm4.0.7a9f4dea188ccacb7d502cdcabb040c1
                            .group:0000000000000000 wm4.USB.h.376.cfdb9ecb25c70fec676f585dede264a7
                            .group:0000000000000000 wm4.Common.h.60.c2f00e237f5994003db83c2422602b22

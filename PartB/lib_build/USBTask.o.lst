@@ -404,11 +404,11 @@ DEFINED SYMBOLS
                             *COM*:0000000000000001 USB_IsInitialized
                             *COM*:0000000000000008 USB_ControlRequest
                             *COM*:0000000000000001 USB_DeviceState
-     /tmp/ccXrC0Dm.s:20     .text.USB_USBTask:0000000000000000 $t
-     /tmp/ccXrC0Dm.s:27     .text.USB_USBTask:0000000000000000 USB_USBTask
-     /tmp/ccXrC0Dm.s:57     .text.USB_DeviceTask:0000000000000000 USB_DeviceTask
-     /tmp/ccXrC0Dm.s:51     .text.USB_DeviceTask:0000000000000000 $t
-     /tmp/ccXrC0Dm.s:161    .text.USB_DeviceTask:000000000000007c $d
+     /tmp/ccNq9g3s.s:20     .text.USB_USBTask:0000000000000000 $t
+     /tmp/ccNq9g3s.s:27     .text.USB_USBTask:0000000000000000 USB_USBTask
+     /tmp/ccNq9g3s.s:57     .text.USB_DeviceTask:0000000000000000 USB_DeviceTask
+     /tmp/ccNq9g3s.s:51     .text.USB_DeviceTask:0000000000000000 $t
+     /tmp/ccNq9g3s.s:161    .text.USB_DeviceTask:000000000000007c $d
                            .group:0000000000000000 wm4.0.7a9f4dea188ccacb7d502cdcabb040c1
                            .group:0000000000000000 wm4.Common.h.60.c2f00e237f5994003db83c2422602b22
                            .group:0000000000000000 wm4._newlib_version.h.4.875b979a44719054cd750d0952ad3fd6

@@ -125,8 +125,8 @@
   71              		.file 5 "/usr/arm-none-eabi/include/sys/reent.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 memcpy.c
-     /tmp/ccdmrmE5.s:17     .text.thumb2_memcpy:0000000000000000 $t
-     /tmp/ccdmrmE5.s:24     .text.thumb2_memcpy:0000000000000000 thumb2_memcpy
+     /tmp/ccU0zqPH.s:17     .text.thumb2_memcpy:0000000000000000 $t
+     /tmp/ccU0zqPH.s:24     .text.thumb2_memcpy:0000000000000000 thumb2_memcpy
                            .group:0000000000000000 wm4.0.7a9f4dea188ccacb7d502cdcabb040c1
                            .group:0000000000000000 wm4._newlib_version.h.4.875b979a44719054cd750d0952ad3fd6
                            .group:0000000000000000 wm4.newlib.h.18.5e5ca3429233af402d406a202f1fc1ac
